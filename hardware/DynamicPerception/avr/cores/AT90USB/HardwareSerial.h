@@ -139,7 +139,7 @@ class HardwareSerial : public Stream
 #if defined(UBRRH) || defined(UBRR0H)
   extern HardwareSerial Serial;
 #elif defined(USBCON) && defined(USE_USB_SERIAL)
-    #warning Loading USB Serial API
+    //#warning Loading USB Serial API
     #include <USBSerialClass.h>
 #endif
 
