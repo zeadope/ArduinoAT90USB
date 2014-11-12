@@ -251,6 +251,11 @@ ISR(USART_UDRE_vect)
 #endif
 
 #ifdef USART1_UDRE_vect
+double get_ser_clear_tm()
+{
+	return SER_CLEAR_TM;
+}
+
 ISR(USART1_UDRE_vect)
 {
   if (tx_buffer1.head == tx_buffer1.tail) {
@@ -268,7 +273,7 @@ ISR(USART1_UDRE_vect)
     tx_buffer1.tail = (tx_buffer1.tail + 1) % SERIAL_BUFFER_SIZE;
     UDR1 = c;
 	while(!(UCSR1A & _BV(TXC0)));
-	_delay_us(SER_CLEAR_TM);
+	_delay_us(get_ser_clear_tm());
 	if(_pin > 0)
 	{
 		digitalWrite(_pin, LOW);
